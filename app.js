@@ -5,6 +5,8 @@ const http         = require('http'),
       sysInfo      = require('./utils/sys-info'),
       env          = process.env;
 
+let fbAppToken = process.env.FB_APP_TOKEN;
+
 let server = http.createServer(function (req, res) {
   let url = req.url;
   if (url == '/') {
@@ -23,7 +25,13 @@ let server = http.createServer(function (req, res) {
     res.end(JSON.stringify(sysInfo[url.slice(6)]()));
   } else if (url.indexOf('helloworld') >= 0) {
     res.end("helloworld");
-  } else {
+  }else if (url.indexOf('/facebookmessenger') == 0) {
+    if (req.query['hub.verify_token'] === fbAppToken) {
+    res.send(req.query['hub.challenge']);
+  }
+  res.send('Error, wrong validation token');
+  }
+  else {
     fs.readFile('./static' + url, function (err, data) {
       if (err) {
         res.writeHead(404);
