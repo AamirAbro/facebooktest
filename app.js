@@ -4,7 +4,7 @@ const http         = require('http'),
       contentTypes = require('./utils/content-types'),
       sysInfo      = require('./utils/sys-info'),
       env          = process.env,
-      bodyParser = require('body-parser'),
+      bodyParser   = require('body-parser'),
       express      = require('express');
 
 let fbAppToken = env.FB_APP_TOKEN;
@@ -43,7 +43,7 @@ app.post('/facebookwebhook/', function (req, res) {
   console.log("facebookwebhook called");
   console.log("req", req);
   var messaging_events = req.body.entry[0].messaging;
-  for (i = 0; i < messaging_events.length; i++) {
+  for (var i = 0; i < messaging_events.length; i++) {
     var emessaging_eventsvent = req.body.entry[0].messaging[i];
     var sender = event.sender.id;
     if (event.message && event.message.text) {
