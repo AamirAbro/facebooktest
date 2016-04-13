@@ -5,6 +5,7 @@ const http         = require('http'),
       sysInfo      = require('./utils/sys-info'),
       env          = process.env,
       bodyParser   = require('body-parser'),
+      request      = require('request'),
       express      = require('express');
 
 let fbAppToken = env.FB_APP_TOKEN;
@@ -29,6 +30,7 @@ app.get('/info', function(req, res){
 app.get('/helloworld', function(req, res){
   console.log("helloworld called");
   res.end("helloworld");
+  sendTextMessage(12, "helloworld");
 });
 
 // for Authorization
@@ -109,7 +111,7 @@ function sendTextMessage(sender, text) {
   var messageData = {
     text:text
   }
-  http.request({
+  request({
     url: 'https://graph.facebook.com/v2.6/me/messages',
     qs: {access_token:token},
     method: 'POST',

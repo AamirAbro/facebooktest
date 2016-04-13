@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "express": "4.x",
-    "body-parser": "1.x"
+    "body-parser": "1.x",
+    "request": "2.71.0"
   },
   "author": "Ionut-Cristian Florescu <ionut.florescu@gmail.com>",
   "license": "ISC"
