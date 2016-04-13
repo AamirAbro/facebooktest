@@ -7,6 +7,9 @@
   "scripts": {
     "start": "node --use_strict start.js"
   },
+  "dependencies": {
+    "express": "4.x"
+  },
   "author": "Ionut-Cristian Florescu <ionut.florescu@gmail.com>",
   "license": "ISC"
 }
