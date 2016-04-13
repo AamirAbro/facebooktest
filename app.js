@@ -119,9 +119,11 @@ function sendTextMessage(sender, text) {
     }
   }, function(error, response, body) {
     if (error) {
-      console.log('Error sending message: ', error);
+      console.log('Error FB Fsending message: ', error);
     } else if (response.body.error) {
-      console.log('Error: ', response.body.error);
+      console.log('Error FB : ', response.body.error);
+    } else {
+      console.log('Fb Message sent succesfully');
     }
   });
 }
