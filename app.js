@@ -28,10 +28,10 @@ app.get('/helloworld', function(req, res){
 });
 
 app.get('/facebookwebhook', function (req, res) {
-  if (req.query['hub.verify_token'] === fbAppToken) {
+  // if (req.query['hub.verify_token'] === fbAppToken) {
     res.send(req.query['hub.challenge']);
-  }
-  res.send('Error, wrong validation token');
+  // }
+  // res.send('Error, wrong validation token');
 })
 
 
