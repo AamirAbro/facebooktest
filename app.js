@@ -24,6 +24,7 @@ app.get('/info', function(req, res){
 });
 
 app.get('/helloworld', function(req, res){
+  console.log("helloworld called");
   res.end("helloworld");
 });
 
