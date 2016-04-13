@@ -48,8 +48,8 @@ app.post('/facebookwebhook/', function (req, res) {
     var sender = event.sender.id;
     if (event.message && event.message.text) {
       var text = event.message.text;
-      console.log("message" + text);
-      // sendTextMessage(sender, "Text received, echo: "+ text.substring(0, 200));
+      console.log("message : " + text);
+      sendTextMessage(sender, "Text received, echo: "+ text.substring(0, 200));
     }
   }
   res.sendStatus(200);
@@ -104,24 +104,24 @@ http.createServer(app).listen(env.NODE_PORT || 3000, env.NODE_IP || 'localhost',
 
 
 
-// var token = env.FB_PAGE_TOKEN;
-// function sendTextMessage(sender, text) {
-//   var messageData = {
-//     text:text
-//   }
-//   request({
-//     url: 'https://graph.facebook.com/v2.6/me/messages',
-//     qs: {access_token:token},
-//     method: 'POST',
-//     json: {
-//       recipient: {id:sender},
-//       message: messageData,
-//     }
-//   }, function(error, response, body) {
-//     if (error) {
-//       console.log('Error sending message: ', error);
-//     } else if (response.body.error) {
-//       console.log('Error: ', response.body.error);
-//     }
-//   });
-// }
+var token = env.FB_PAGE_TOKEN;
+function sendTextMessage(sender, text) {
+  var messageData = {
+    text:text
+  }
+  http.request({
+    url: 'https://graph.facebook.com/v2.6/me/messages',
+    qs: {access_token:token},
+    method: 'POST',
+    json: {
+      recipient: {id:sender},
+      message: messageData,
+    }
+  }, function(error, response, body) {
+    if (error) {
+      console.log('Error sending message: ', error);
+    } else if (response.body.error) {
+      console.log('Error: ', response.body.error);
+    }
+  });
+}
