@@ -27,9 +27,10 @@ let server = http.createServer(function (req, res) {
     res.end("helloworld");
   }else if (url.indexOf('/facebookmessenger') == 0) {
     if (req.query['hub.verify_token'] === fbAppToken) {
-    res.send(req.query['hub.challenge']);
-  }
-  res.send('Error, wrong validation token');
+      res.send(req.query['hub.challenge']);
+    } else {
+      res.send('Error, wrong validation token');
+    }
   }
   else {
     fs.readFile('./static' + url, function (err, data) {
