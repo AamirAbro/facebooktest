@@ -4,11 +4,14 @@ const http         = require('http'),
       contentTypes = require('./utils/content-types'),
       sysInfo      = require('./utils/sys-info'),
       env          = process.env,
+      bodyParser = require('body-parser'),
       express      = require('express');
 
 let fbAppToken = env.FB_APP_TOKEN;
 
 var app = express();
+
+app.use(bodyParser.json());
 
 app.use('/static', express.static('static'));
 
