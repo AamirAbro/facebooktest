@@ -27,6 +27,13 @@ app.get('/helloworld', function(req, res){
   res.end("helloworld");
 });
 
+app.get('/facebookwebhook', function (req, res) {
+  if (req.query['hub.verify_token'] === fbAppToken) {
+    res.send(req.query['hub.challenge']);
+  }
+  res.send('Error, wrong validation token');
+})
+
 
 
 // let server = http.createServer(function (req, res) {
