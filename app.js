@@ -13,6 +13,7 @@ let fbAppToken = env.FB_APP_TOKEN;
 var app = express();
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 app.use('/static', express.static('static'));
 
@@ -56,6 +57,18 @@ app.post('/facebookwebhook/', function (req, res) {
   }
   res.sendStatus(200);
 });
+
+// for Authorization
+app.post('/transaction/complete', function (req, res) {
+  
+  console.log("body:" + JSON.stringify(req.body));
+
+  console.log("comleteTrans called");
+  var url = 'https://callback.careem.com?PaRes=' + req.body.PaRes
+  // res.redirect(url);
+
+  res.send('<script> window.location.href="' + url +'";</script>')
+})
 
 
 
